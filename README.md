@@ -1,2 +1,3 @@
-# rapt-dash
-Angular rapt-pill dash
+# RaptDash
+
+A better dashboard for the Rapt Pill.

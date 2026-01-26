@@ -1,0 +1,16 @@
+<h1>Hello and Welcome to RaptDash!</h1>
+<div class="card login-card">
+  <form #f="ngForm" (ngSubmit)="submitForm(f)" ngNativeValidate>
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" ngModel required>
+    </div>
+    <div>
+      <label for="apiToken">API Token:</label>
+      <input type="password" id="apiToken" name="apiToken" ngModel required>
+    </div>
+    <div>
+      <button type="submit">Login</button>
+    </div>
+  </form>
+</div>

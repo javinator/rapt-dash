@@ -1,0 +1,12 @@
+<rd-alert></rd-alert>
+<div class="content">
+  @if (loading()) {
+    <rd-spinner></rd-spinner>
+  } @else {
+    @if (!authenticated()) {
+      <rd-login (formLogin)="login($event.username, $event.apiToken)"></rd-login>
+    } @else {
+      You are authenticated!
+    }
+  }
+</div>

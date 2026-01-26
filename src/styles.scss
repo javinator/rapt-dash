@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  background-color: #DDD;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.accent-blue {
+  background-color: #03B;
+}
+
+.accent-red {
+  background-color: #F52;
+}
+
+.card {
+  color: #111;
+  background-color: #EEE;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 1px 1px 4px #777;
+}
