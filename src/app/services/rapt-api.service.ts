@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { firstValueFrom, Observable } from 'rxjs';
+import { catchError, firstValueFrom, Observable, of } from 'rxjs';
 import { Hydrometer, Message, Telemetry } from '@models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertComponent } from '@components';
@@ -53,25 +53,51 @@ export class RaptApiService {
 
   getHydrometers(): Observable<Hydrometer[]> {
     const token = this.cookieService.get('bearerToken');
-    return this.http.get<Hydrometer[]>('https://api.rapt.io/api/Hydrometers/GetHydrometers', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
-      },
-    });
+    return this.http
+      .get<Hydrometer[]>('https://api.rapt.io/api/Hydrometers/GetHydrometers', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          this.snackBar.openFromComponent(AlertComponent, {
+            data: {
+              type: 'error',
+              text: 'Error fetching hydrometers!',
+            } as Message,
+          });
+          console.warn(err);
+          return of([]);
+        }),
+      );
   }
 
   getTelemetry(hydroId: string, sessionId: string): Observable<Telemetry[]> {
     const token = this.cookieService.get('bearerToken');
-    return this.http.get<Telemetry[]>('https://api.rapt.io/api/Hydrometers/GetTelemetry', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
-      },
-      params: {
-        hydrometerId: hydroId,
-        profileSessionId: sessionId,
-      },
-    });
+    return this.http
+      .get<Telemetry[]>('https://api.rapt.io/api/Hydrometers/GetTelemetry', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        params: {
+          hydrometerId: hydroId,
+          profileSessionId: sessionId,
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          this.snackBar.openFromComponent(AlertComponent, {
+            data: {
+              type: 'error',
+              text: 'Error fetching telemetry!',
+            } as Message,
+          });
+          console.warn(err);
+          return of([]);
+        }),
+      );
   }
 }

@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
-import { DashboardPage, HomePage } from '@pages';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomePage,
+    loadComponent: () => import('./pages/home/home.page').then((m) => m.HomePage),
   },
   {
     path: 'dash',
-    component: DashboardPage,
+    loadComponent: () => import('./pages/dashboard/dashboard.page').then((m) => m.DashboardPage),
   },
 ];

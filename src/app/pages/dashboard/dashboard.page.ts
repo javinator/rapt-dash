@@ -1,5 +1,9 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { AlertComponent, FermentationGraphComponent, SpinnerComponent } from '@components';
+import {
+  AlertComponent,
+  FermentationGraphComponent,
+  SpinnerComponent,
+} from '@components';
 import { Hydrometer, Message, Telemetry } from '@models';
 import { RaptApiService } from '@services';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,10 +17,16 @@ import { AllCommunityModule, ModuleRegistry } from 'ag-charts-community';
   selector: 'dashboard',
   templateUrl: './dashboard.page.html',
   styleUrl: './dashboard.page.scss',
-  imports: [SpinnerComponent, MatIconModule, FermentationGraphComponent, RelativeTimePipe],
+  imports: [
+    SpinnerComponent,
+    MatIconModule,
+    FermentationGraphComponent,
+    RelativeTimePipe,
+  ],
 })
 export class DashboardPage implements OnInit {
   loading = signal(true);
+  noResults = signal(false);
   hydrometer = signal<Hydrometer | undefined>(undefined);
   telemetry = signal<Telemetry[]>([]);
   og = computed(() => {
@@ -43,15 +53,24 @@ export class DashboardPage implements OnInit {
       return;
     }
     firstValueFrom(this.apiService.getHydrometers()).then((hydrometers) => {
-      console.debug('Hydrometers loaded!');
-      this.hydrometer.set(hydrometers[0]);
-      this.apiService
-        .getTelemetry(hydrometers[0].id, hydrometers[0].activeProfileSession.id)
-        .subscribe((tele) => {
-          console.debug('Telemetry loaded!');
-          this.telemetry.set(tele);
-          this.loading.set(false);
-        });
+      if (hydrometers.length > 0) {
+        console.debug('Hydrometers loaded!');
+        this.hydrometer.set(hydrometers[0]);
+        this.apiService
+          .getTelemetry(
+            hydrometers[0].id,
+            hydrometers[0].activeProfileSession.id,
+          )
+          .subscribe((tele) => {
+            console.debug('Telemetry loaded!');
+            this.telemetry.set(tele);
+            this.noResults.set(false);
+            this.loading.set(false);
+          });
+      } else {
+        this.noResults.set(true);
+        this.loading.set(false);
+      }
     });
   }
 

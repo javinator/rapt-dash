@@ -8,7 +8,9 @@
   @if (loading()) {
     <rd-spinner></rd-spinner>
   } @else {
-    @if (hydrometer()) {
+    @if (noResults()) {
+      <h4>Sorry, the RAPT API is currently unavailable, please try again later!</h4>
+    } @else if (hydrometer()) {
       <h2>
         {{ hydrometer()!.name }}
         @if (hydrometer()!.activeProfileSession) {
@@ -32,11 +34,13 @@
           Temperature: {{ hydrometer()!.temperature!.toFixed(1) }} °C
         }
       </h3>
-      <h4 class="inline">
-        Original Gravity: {{ (og() / 1000).toFixed(3) }} &nbsp; - &nbsp; Final Gravity:
-        {{ (fg() / 1000).toFixed(3) }} &nbsp; - &nbsp; Attenuation:
-        {{ (((og() - fg()) / (og() - 1000)) * 100).toFixed(1) }}%
-      </h4>
+      @if (telemetry().length > 0) {
+        <h4 class="inline">
+          Original Gravity: {{ (og() / 1000).toFixed(3) }} &nbsp; - &nbsp; Final Gravity:
+          {{ (fg() / 1000).toFixed(3) }} &nbsp; - &nbsp; Attenuation:
+          {{ (((og() - fg()) / (og() - 1000)) * 100).toFixed(1) }}%
+        </h4>
+      }
       <h4 class="inline">
         @if (hydrometer()!.battery) {
           Battery: {{ hydrometer()!.battery!.toFixed(1) }}% &nbsp; - &nbsp;
