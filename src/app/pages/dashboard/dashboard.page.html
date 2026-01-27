@@ -1,0 +1,56 @@
+<div class="header">
+  <button (click)="reloadData()" [disabled]="loading()" class="reload-button">
+    <mat-icon fontIcon="refresh"></mat-icon>
+  </button>
+  <h1>Rapt Dashboard</h1>
+</div>
+<div class="card">
+  @if (loading()) {
+    <rd-spinner></rd-spinner>
+  } @else {
+    @if (hydrometer()) {
+      <h2>
+        {{ hydrometer()!.name }}
+        @if (hydrometer()!.activeProfileSession) {
+          ({{ hydrometer()!.activeProfileSession.name }})
+        }
+      </h2>
+      <h3 class="inline">
+        @if (hydrometer()!.gravity) {
+          Gravity: {{ (hydrometer()!.gravity! / 1000).toFixed(3) }}
+          @if (hydrometer()!.gravityVelocity && hydrometer()!.gravityVelocity! > 0) {
+            ({{ hydrometer()!.gravityVelocity!.toFixed(1) }}
+            <mat-icon fontIcon="trending_up"></mat-icon>)
+          }
+          @if (hydrometer()!.gravityVelocity && hydrometer()!.gravityVelocity! < 0) {
+            ({{ hydrometer()!.gravityVelocity!.toFixed(1) }}
+            <mat-icon fontIcon="trending_down"></mat-icon>)
+          }
+          &nbsp; - &nbsp;
+        }
+        @if (hydrometer()!.temperature) {
+          Temperature: {{ hydrometer()!.temperature!.toFixed(1) }} °C
+        }
+      </h3>
+      <h4 class="inline">
+        Original Gravity: {{ (og() / 1000).toFixed(3) }} &nbsp; - &nbsp; Final Gravity:
+        {{ (fg() / 1000).toFixed(3) }} &nbsp; - &nbsp; Attenuation:
+        {{ (((og() - fg()) / (og() - 1000)) * 100).toFixed(1) }}%
+      </h4>
+      <h4 class="inline">
+        @if (hydrometer()!.battery) {
+          Battery: {{ hydrometer()!.battery!.toFixed(1) }}% &nbsp; - &nbsp;
+        }
+        @if (hydrometer()!.rssi) {
+          Signal: {{ hydrometer()!.rssi }} dB &nbsp; - &nbsp;
+        }
+        @if (hydrometer()!.lastActivityTime) {
+          Last Telemetry: {{ hydrometer()!.lastActivityTime! | relativeTime }}
+        }
+      </h4>
+      @if (telemetry().length > 0) {
+        <rd-fermentation-table [telemetry]="telemetry()"></rd-fermentation-table>
+      }
+    }
+  }
+</div>

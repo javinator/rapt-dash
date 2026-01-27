@@ -1,0 +1,17 @@
+@if (message) {
+  <div
+    [class]="{ 'alert': true, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
+    @if (message.type === 'success') {
+      <mat-icon class="success" fontIcon="check_circle"></mat-icon>
+    }
+    @if (message.type === 'error') {
+      <mat-icon class="error" fontIcon="cancel"></mat-icon>
+    }
+    @if (message.type === 'info') {
+      <mat-icon class="info" fontIcon="info"></mat-icon>
+    }
+    <div class="alert-text">
+      {{ message.text }}
+    </div>
+  </div>
+}

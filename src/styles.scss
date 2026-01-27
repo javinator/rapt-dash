@@ -1,5 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.snack-bar-overrides((
+    container-shape: 6px,
+    container-color: #FFF
+  ));
+}
+
+html {
+  height: 100%;
+}
+
 body {
+  color-scheme: light;
   margin: 0;
   background-color: #DDD;
   font-family: 'Google Sans', sans-serif;
@@ -19,4 +32,38 @@ body {
   border-radius: 16px;
   padding: 16px;
   box-shadow: 1px 1px 4px #777;
+}
+
+input {
+  padding: 6px;
+  border-radius: 6px;
+  border: 2px solid #CCC;
+}
+
+button {
+  padding: 6px;
+  border-radius: 6px;
+  margin: 16px auto;
+  width: 100px;
+  border: 2px solid #CCC;
+  cursor: pointer;
+  background-color: #DDD;
+  transition: 0.2s;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button:hover:not([disabled]) {
+  background-color: #EEE;
+  box-shadow: 1px 1px 3px #03B3;
+}
+
+button:active:not([disabled]) {
+  background-color: #ABD;
+}
+
+button.primary {
+  border: 2px solid #03B;
 }

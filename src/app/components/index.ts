@@ -1,3 +1,4 @@
-export * from './alert/alert';
-export * from './login/login';
-export * from './spinner/spinner';
+export { AlertComponent } from './alert/alert.component';
+export { FermentationGraphComponent } from './fermentation-graph/fermentation-graph.component';
+export { LoginComponent } from './login/login.component';
+export { SpinnerComponent } from './spinner/spinner.component';

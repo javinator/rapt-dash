@@ -1,2 +1,1 @@
-export * from './alert.service';
-export * from './rapt-api.service';
+export { RaptApiService } from './rapt-api.service';

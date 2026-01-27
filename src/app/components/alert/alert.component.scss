@@ -1,0 +1,28 @@
+.alert {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.alert-text {
+  line-height: 36px;
+  margin-left: 48px;
+}
+
+mat-icon {
+  font-size: 36px;
+  height: 36px;
+  width: 36px;
+}
+
+mat-icon.success {
+  color: #090;
+}
+
+mat-icon.error {
+  color: #900;
+}
+
+mat-icon.info {
+  color: #009;
+}

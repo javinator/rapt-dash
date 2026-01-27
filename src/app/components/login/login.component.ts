@@ -3,11 +3,11 @@ import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'rd-login',
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
   imports: [FormsModule],
 })
-export class Login {
+export class LoginComponent {
   formLogin = output<{ username: string; apiToken: string }>();
 
   submitForm(f: NgForm) {
