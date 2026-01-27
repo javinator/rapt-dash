@@ -12,6 +12,11 @@ export const routes: Routes = [
       import('./pages/dashboard/dashboard.page').then((m) => m.DashboardPage),
   },
   {
+    path: 'history',
+    loadComponent: () =>
+      import('./pages/history/history.page').then((m) => m.HistoryPage),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, firstValueFrom, Observable, of } from 'rxjs';
-import { Hydrometer, Message, Telemetry } from '@models';
+import { Hydrometer, Message, ProfileSession, Telemetry } from '@models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertComponent } from '@components';
 import { CookieService } from 'ngx-cookie-service';
@@ -93,6 +93,38 @@ export class RaptApiService {
             data: {
               type: 'error',
               text: 'Error fetching telemetry!',
+            } as Message,
+          });
+          console.warn(err);
+          return of([]);
+        }),
+      );
+  }
+
+  getSessions(hydroId: string): Observable<ProfileSession[]> {
+    const token = this.cookieService.get('bearerToken');
+    return this.http
+      .get<ProfileSession[]>(
+        'https://api.rapt.io/api/ProfileSessions/GetHydrometerProfileSessions',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+          },
+          params: {
+            hydrometerId: hydroId,
+            page: 1,
+            pageSize: 5,
+            filterText: '',
+          },
+        },
+      )
+      .pipe(
+        catchError((err) => {
+          this.snackBar.openFromComponent(AlertComponent, {
+            data: {
+              type: 'error',
+              text: 'Error fetching profile sessions!',
             } as Message,
           });
           console.warn(err);

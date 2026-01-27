@@ -25,6 +25,10 @@ import { AllCommunityModule, ModuleRegistry } from 'ag-charts-community';
   ],
 })
 export class DashboardPage implements OnInit {
+  private readonly apiService = inject(RaptApiService);
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly router = inject(Router);
+
   loading = signal(true);
   noResults = signal(false);
   hydrometer = signal<Hydrometer | undefined>(undefined);
@@ -35,9 +39,6 @@ export class DashboardPage implements OnInit {
   fg = computed(() => {
     return Math.min(...this.telemetry().map((tele) => tele.gravity ?? 1));
   });
-  private readonly apiService = inject(RaptApiService);
-  private readonly snackBar = inject(MatSnackBar);
-  private readonly router = inject(Router);
 
   ngOnInit() {
     ModuleRegistry.registerModules([AllCommunityModule]);
@@ -77,5 +78,11 @@ export class DashboardPage implements OnInit {
   reloadData() {
     this.loading.set(true);
     this.initializeData();
+  }
+
+  openHistory() {
+    void this.router.navigate(['/history'], {
+      queryParams: { hydrometerId: this.hydrometer()?.id },
+    });
   }
 }
