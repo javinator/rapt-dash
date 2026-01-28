@@ -32,7 +32,7 @@ export class RaptApiService {
           },
         }),
       );
-      console.log(token);
+      console.debug(token);
       if (token.access_token) {
         let expiryDate = new Date();
         expiryDate.setTime(expiryDate.getTime() + 3600000);

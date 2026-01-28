@@ -26,10 +26,11 @@ export class HomePage implements OnInit {
 
   protected login(username: string, apiToken: string) {
     this.loading.set(true);
-    console.log(username + ':' + apiToken);
     this.apiService.getBearerToken(username, apiToken).then((success) => {
       this.authenticated.set(success);
-      void this.router.navigate(['/dash']);
+      if (success) {
+        void this.router.navigate(['/dash']);
+      }
       this.loading.set(false);
     });
   }
