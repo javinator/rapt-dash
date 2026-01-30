@@ -53,6 +53,15 @@ export class FermentationGraphComponent {
             enabled: false,
           },
         },
+        rssiAxis: {
+          position: 'right',
+          label: {
+            enabled: false,
+          },
+          gridLine: {
+            enabled: false,
+          },
+        },
       },
       series: [
         {
@@ -81,10 +90,9 @@ export class FermentationGraphComponent {
           type: 'line',
           xKey: 'date',
           yKey: 'rssi',
-          yKeyAxis: 'temperatureAxis',
+          yKeyAxis: 'rssiAxis',
           yName: 'Signal',
           strokeWidth: 0,
-          showInMiniChart: true,
           showInLegend: false,
           marker: {
             enabled: false,
