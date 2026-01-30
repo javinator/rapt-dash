@@ -1,4 +1,7 @@
 <div class="header">
+  <button (click)="logout()" class="reload-button">
+    <mat-icon fontIcon="logout"></mat-icon>
+  </button>
   <button (click)="reloadData()" [disabled]="loading()" class="reload-button">
     <mat-icon fontIcon="refresh"></mat-icon>
   </button>

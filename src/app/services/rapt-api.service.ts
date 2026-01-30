@@ -18,6 +18,13 @@ export class RaptApiService {
     return this.cookieService.check('bearerToken');
   }
 
+  invalidateToken() {
+    this.cookieService.delete('bearerToken');
+    this.snackBar.openFromComponent(AlertComponent, {
+      data: { type: 'success', text: 'Logout successful!' } as Message,
+    });
+  }
+
   async getBearerToken(username: string, apiToken: string) {
     const body = new HttpParams()
       .set('client_id', 'rapt-user')

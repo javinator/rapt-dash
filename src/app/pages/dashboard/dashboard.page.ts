@@ -85,4 +85,9 @@ export class DashboardPage implements OnInit {
       queryParams: { hydrometerId: this.hydrometer()?.id },
     });
   }
+
+  logout() {
+    this.apiService.invalidateToken();
+    void this.router.navigate(['/']);
+  }
 }
