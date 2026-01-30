@@ -11,6 +11,12 @@ import { AgChartOptions } from 'ag-charts-community';
 })
 export class FermentationGraphComponent {
   telemetry = input.required<Telemetry[]>();
+  maxTemp = computed(() => {
+    return Math.max(...this.telemetry().map((tele) => tele.temperature ?? 0));
+  });
+  minTemp = computed(() => {
+    return Math.min(...this.telemetry().map((tele) => tele.temperature ?? 30));
+  });
 
   chartOptions = computed<AgChartOptions>(() => {
     const options = [];
@@ -19,6 +25,7 @@ export class FermentationGraphComponent {
         date: new Date(tele.createdOn),
         gravity: tele.gravity ? tele.gravity / 1000 : 0,
         temperature: tele.temperature,
+        rssi: tele.rssi,
       });
     }
     console.log(options);
@@ -33,6 +40,17 @@ export class FermentationGraphComponent {
           unit: 'hour',
           interval: {
             step: 'day',
+          },
+        },
+        gravityAxis: {
+          position: 'left',
+        },
+        temperatureAxis: {
+          position: 'right',
+          min: Math.round(this.minTemp()) - 2,
+          max: Math.round(this.maxTemp()) + 2,
+          gridLine: {
+            enabled: false,
           },
         },
       },
@@ -57,6 +75,19 @@ export class FermentationGraphComponent {
           stroke: '#F52',
           marker: {
             fill: '#F52',
+          },
+        },
+        {
+          type: 'line',
+          xKey: 'date',
+          yKey: 'rssi',
+          yKeyAxis: 'temperatureAxis',
+          yName: 'Signal',
+          strokeWidth: 0,
+          showInMiniChart: true,
+          showInLegend: false,
+          marker: {
+            enabled: false,
           },
         },
       ],
