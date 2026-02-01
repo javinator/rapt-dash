@@ -16,6 +16,9 @@ export class HomePage implements OnInit {
   private readonly router = inject(Router);
 
   ngOnInit() {
+    if (this.apiService.isAuthSet()) {
+      void this.router.navigate(['/dash']);
+    }
     setTimeout(() => this.loading.set(false), 500);
   }
 

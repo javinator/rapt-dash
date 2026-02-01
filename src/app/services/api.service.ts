@@ -4,6 +4,7 @@ import { catchError, firstValueFrom, Observable, of } from 'rxjs';
 import { Message, ProfileSession, Telemetry } from '@models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertComponent } from '@components';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,17 +12,14 @@ import { AlertComponent } from '@components';
 export class ApiService {
   private readonly http = inject(HttpClient);
   private readonly snackBar = inject(MatSnackBar);
-
-  private email = '';
-  private password = '';
+  private readonly cookieService = inject(CookieService);
 
   isAuthSet() {
-    return this.email.length > 0 && this.password.length > 0;
+    return this.cookieService.check('basic-auth');
   }
 
   logout() {
-    this.email = '';
-    this.password = '';
+    this.cookieService.delete('basic-auth');
     this.snackBar.openFromComponent(AlertComponent, {
       data: { type: 'success', text: 'Logout successful!' } as Message,
     });
@@ -40,8 +38,7 @@ export class ApiService {
         this.snackBar.openFromComponent(AlertComponent, {
           data: { type: 'success', text: 'Login successful!' } as Message,
         });
-        this.email = email;
-        this.password = password;
+        this.cookieService.set('basic-auth', btoa(email + ':' + password));
       }
       return success;
     } catch (e) {
@@ -60,7 +57,7 @@ export class ApiService {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Basic ' + btoa(this.email + ':' + this.password),
+            Authorization: 'Basic ' + this.cookieService.get('basic-auth'),
           },
         },
       )
@@ -85,7 +82,7 @@ export class ApiService {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Basic ' + btoa(this.email + ':' + this.password),
+            Authorization: 'Basic ' + this.cookieService.get('basic-auth'),
           },
         },
       )
@@ -110,7 +107,7 @@ export class ApiService {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Basic ' + btoa(this.email + ':' + this.password),
+            Authorization: 'Basic ' + this.cookieService.get('basic-auth'),
           },
         },
       )
