@@ -22,6 +22,9 @@ export class ApiService {
   logout() {
     this.email = '';
     this.password = '';
+    this.snackBar.openFromComponent(AlertComponent, {
+      data: { type: 'success', text: 'Logout successful!' } as Message,
+    });
   }
 
   async login(email: string, password: string) {

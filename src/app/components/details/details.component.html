@@ -3,31 +3,31 @@
 </h2>
 <h3 class="inline">
   @if (lastTelemetry()?.gravity) {
-    Gravity: {{ (lastTelemetry().gravity!).toFixed(3) }}
+    <span>Gravity: {{ (lastTelemetry().gravity!).toFixed(3) }}</span>
     &nbsp; - &nbsp;
   }
   @if (lastTelemetry()?.temperature) {
-    Temperature: {{ lastTelemetry().temperature!.toFixed(1) }} °C
+    <span>Temperature: {{ lastTelemetry().temperature!.toFixed(1) }} °C</span>
   }
 </h3>
 @if (telemetry().length > 0) {
   <h4 class="inline">
-    Original Gravity: {{ (og()).toFixed(3) }} &nbsp; - &nbsp; Final Gravity:
-    {{ (fg()).toFixed(3) }} &nbsp; - &nbsp; Attenuation:
-    {{ (((og() - fg()) / (og() - 1)) * 100).toFixed(1) }}%
+    <span>Original Gravity: {{ (og()).toFixed(3) }}</span> &nbsp; - &nbsp;
+    <span>Final Gravity: {{ (fg()).toFixed(3) }}</span> &nbsp; - &nbsp;
+    <span>Attenuation: {{ (((og() - fg()) / (og() - 1)) * 100).toFixed(1) }}%</span>
   </h4>
 }
 <h4 class="inline">
   @if (lastTelemetry()?.battery) {
-    Battery: {{ lastTelemetry().battery!.toFixed(1) }}% &nbsp; - &nbsp;
+    <span>Battery: {{ lastTelemetry().battery!.toFixed(1) }}%</span> &nbsp; - &nbsp;
   }
   @if (lastTelemetry()?.rssi) {
-    Signal: {{ lastTelemetry().rssi }} dB &nbsp; - &nbsp;
+    <span>Signal: {{ lastTelemetry().rssi }} dB</span> &nbsp; - &nbsp;
   }
   @if (lastTelemetry()?.date) {
-    Last Telemetry: {{ lastTelemetry().date | relativeTime }}
+    <span>Last Telemetry: {{ lastTelemetry().date | relativeTime }}</span>
   }
 </h4>
-@if (telemetry().length > 0) {
+@if (telemetry().length > 0 && isLargeScreen()) {
   <rd-fermentation-table [telemetry]="telemetry()"></rd-fermentation-table>
 }

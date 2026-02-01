@@ -14,6 +14,14 @@ export class DetailsComponent {
   name = input.required<string>();
   telemetry = input.required<Telemetry[]>();
 
+  isLargeScreen() {
+    return (
+      (window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth) > 1200
+    );
+  }
+
   lastTelemetry = computed(() =>
     this.telemetry().reduce((p, n) => (p.date > n.date ? p : n)),
   );

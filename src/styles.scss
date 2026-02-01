@@ -18,14 +18,6 @@ body {
   font-family: 'Google Sans', sans-serif;
 }
 
-.accent-blue {
-  background-color: #03B;
-}
-
-.accent-red {
-  background-color: #F52;
-}
-
 .card {
   color: #111;
   background-color: #EEE;
@@ -66,4 +58,13 @@ button:active:not([disabled]) {
 
 button.primary {
   border: 2px solid #03B;
+}
+
+button.secondary {
+  border: 2px solid #F52;
+}
+
+h1 {
+  margin-left: 4px;
+  margin-right: 4px;
 }
