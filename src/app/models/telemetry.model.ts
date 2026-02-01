@@ -1,6 +1,6 @@
 export interface Telemetry {
   id: string;
-  createdOn: Date;
+  date: Date;
   temperature?: number;
   gravity?: number;
   gravityVelocity?: number;

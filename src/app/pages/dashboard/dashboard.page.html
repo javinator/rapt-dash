@@ -1,9 +1,12 @@
 <div class="header">
-  <button (click)="logout()" class="reload-button">
+  <button (click)="logout()" class="reload-button" title="Logout">
     <mat-icon fontIcon="logout"></mat-icon>
   </button>
-  <button (click)="reloadData()" [disabled]="loading()" class="reload-button">
+  <button (click)="reloadData()" [disabled]="loading()" class="reload-button" title="Reload Dashboard">
     <mat-icon fontIcon="refresh"></mat-icon>
+  </button>
+  <button (click)="openHistory()" class="reload-button" title="Open History">
+    <mat-icon fontIcon="history"></mat-icon>
   </button>
   <h1>Rapt Dashboard</h1>
 </div>
@@ -11,53 +14,9 @@
   @if (loading()) {
     <rd-spinner></rd-spinner>
   } @else {
-    @if (noResults()) {
-      <h4>Sorry, the RAPT API is currently unavailable, please try again later!</h4>
-    } @else if (hydrometer()) {
-      <h2>
-        {{ hydrometer()!.name }}
-        @if (hydrometer()!.activeProfileSession) {
-          ({{ hydrometer()!.activeProfileSession.name }})
-        }
-      </h2>
-      <h3 class="inline">
-        @if (hydrometer()!.gravity) {
-          Gravity: {{ (hydrometer()!.gravity! / 1000).toFixed(3) }}
-          @if (hydrometer()!.gravityVelocity && hydrometer()!.gravityVelocity! > 0) {
-            ({{ hydrometer()!.gravityVelocity!.toFixed(1) }}
-            <mat-icon fontIcon="trending_up"></mat-icon>)
-          }
-          @if (hydrometer()!.gravityVelocity && hydrometer()!.gravityVelocity! < 0) {
-            ({{ hydrometer()!.gravityVelocity!.toFixed(1) }}
-            <mat-icon fontIcon="trending_down"></mat-icon>)
-          }
-          &nbsp; - &nbsp;
-        }
-        @if (hydrometer()!.temperature) {
-          Temperature: {{ hydrometer()!.temperature!.toFixed(1) }} °C
-        }
-      </h3>
-      @if (telemetry().length > 0) {
-        <h4 class="inline">
-          Original Gravity: {{ (og() / 1000).toFixed(3) }} &nbsp; - &nbsp; Final Gravity:
-          {{ (fg() / 1000).toFixed(3) }} &nbsp; - &nbsp; Attenuation:
-          {{ (((og() - fg()) / (og() - 1000)) * 100).toFixed(1) }}%
-        </h4>
-      }
-      <h4 class="inline">
-        @if (hydrometer()!.battery) {
-          Battery: {{ hydrometer()!.battery!.toFixed(1) }}% &nbsp; - &nbsp;
-        }
-        @if (hydrometer()!.rssi) {
-          Signal: {{ hydrometer()!.rssi }} dB &nbsp; - &nbsp;
-        }
-        @if (hydrometer()!.lastActivityTime) {
-          Last Telemetry: {{ hydrometer()!.lastActivityTime! | relativeTime }}
-        }
-      </h4>
-      @if (telemetry().length > 0) {
-        <rd-fermentation-table [telemetry]="telemetry()"></rd-fermentation-table>
-      }
-    }
+    <rd-fermentation-details
+      [name]="session()?.name ?? 'Unnamed'"
+      [telemetry]="telemetry()"
+    ></rd-fermentation-details>
   }
 </div>

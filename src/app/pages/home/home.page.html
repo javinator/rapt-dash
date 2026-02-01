@@ -1,4 +1,4 @@
-@if (loading() || authenticated()) {
+@if (loading()) {
   <rd-spinner></rd-spinner>
 } @else {
   <rd-login (formLogin)="login($event.username, $event.apiToken)"></rd-login>

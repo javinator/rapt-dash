@@ -1,1 +1,1 @@
-export { RaptApiService } from './rapt-api.service';
+export { ApiService } from './api.service';

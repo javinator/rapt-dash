@@ -3,6 +3,8 @@
 A better dashboard for the Rapt Pill.
 For the moment it only displays the values of the first pill hydrometer and the values of the active fermentation.
 
+For the first version I tried to use the RAPT Rest API, but soon gave up and made my own backend. 
+
 ### RAPT API
 
 The performance of the RAPT API is not really what it should be and the CORS header are not correctly set

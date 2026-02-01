@@ -22,13 +22,12 @@ export class FermentationGraphComponent {
     const options = [];
     for (let tele of this.telemetry()) {
       options.push({
-        date: new Date(tele.createdOn),
+        date: new Date(tele.date),
         gravity: tele.gravity ? tele.gravity / 1000 : 0,
         temperature: tele.temperature,
         rssi: tele.rssi,
       });
     }
-    console.log(options);
     return {
       data: options,
       background: {

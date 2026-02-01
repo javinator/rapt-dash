@@ -9,11 +9,11 @@
     <rd-spinner></rd-spinner>
   } @else {
     @if (sessions().length === 0) {
-      <h4>This part of the RAPT API cannot be used!</h4>
+      <h4>No sessions yet!</h4>
     } @else {
       @for (session of sessions(); track session.id) {
         <div class="session-card">
-          <h4>{{ session.name }}</h4>
+          <h4>{{ session.name }} ({{ session.start | date:'d MMM yy' }} - {{ session.end | date:'d MMM yy' }})</h4>
         </div>
       }
     }

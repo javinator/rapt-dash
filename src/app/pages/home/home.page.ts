@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { LoginComponent, SpinnerComponent } from '@components';
-import { RaptApiService } from '@services';
+import { ApiService } from '@services';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 
@@ -12,22 +12,16 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit {
   loading = signal(true);
-  authenticated = signal(false);
-  private readonly apiService = inject(RaptApiService);
+  private readonly apiService = inject(ApiService);
   private readonly router = inject(Router);
 
   ngOnInit() {
-    this.authenticated.set(this.apiService.isTokenValid());
-    if (this.authenticated()) {
-      void this.router.navigate(['/dash']);
-    }
     setTimeout(() => this.loading.set(false), 500);
   }
 
   protected login(username: string, apiToken: string) {
     this.loading.set(true);
-    this.apiService.getBearerToken(username, apiToken).then((success) => {
-      this.authenticated.set(success);
+    this.apiService.login(username, apiToken).then((success) => {
       if (success) {
         void this.router.navigate(['/dash']);
       }
