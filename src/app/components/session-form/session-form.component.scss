@@ -1,0 +1,24 @@
+.login-card {
+  width: 360px;
+  margin: auto;
+}
+
+label {
+  margin: 8px;
+  width: 160px;
+  display: inline-block;
+}
+
+input {
+  width: 318px;
+}
+
+.date-time input {
+  width: 150px;
+  margin-right: 2px;
+}
+
+button[type=submit] {
+  margin-top: 32px;
+  padding: 8px 32px;
+}

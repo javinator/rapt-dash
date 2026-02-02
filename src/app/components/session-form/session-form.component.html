@@ -1,0 +1,49 @@
+<form #f="ngForm" (ngSubmit)="submitForm(f)" ngNativeValidate>
+  <div>
+    <label for="name">Session Name:</label>
+    <input
+      id="name"
+      [ngModel]="session()?.name"
+      name="name"
+      required
+      type="text"
+    />
+  </div>
+  <div class="date-time">
+    <label for="start-date">Start:</label>
+    <input
+      id="start-date"
+      [ngModel]="session()?.start?.toString()?.slice(0, 10)"
+      name="start-date"
+      required
+      type="date"
+    />
+    <input
+      id="start-time"
+      [ngModel]="session()?.start?.toString()?.slice(11, 16)"
+      name="start-time"
+      required
+      type="time"
+      step="60"
+    />
+  </div>
+  <div class="date-time">
+    <label for="end-date">End:</label>
+    <input
+      id="end-date"
+      [ngModel]="session()?.end?.toString()?.slice(0, 10)"
+      name="end-date"
+      type="date"
+    />
+    <input
+      id="end-time"
+      [ngModel]="session()?.end?.toString()?.slice(11, 16)"
+      name="end-time"
+      type="time"
+      step="60"
+    />
+  </div>
+  <div>
+    <button class="primary" type="submit">Save</button>
+  </div>
+</form>

@@ -1,0 +1,27 @@
+.inline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  text-align: left;
+}
+
+.session-button {
+  position: relative;
+  width: 320px;
+  margin: 4px;
+  padding: 16px;
+}
+
+.session-button h4 {
+  margin: 4px;
+}
+
+.session-button mat-icon {
+  position: absolute;
+  font-size: 24px;
+  top: 0;
+  right: 0;
+}

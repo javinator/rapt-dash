@@ -58,6 +58,10 @@ export class DashboardPage implements OnInit {
     void this.router.navigate(['/history']);
   }
 
+  openSessions() {
+    void this.router.navigate(['/session']);
+  }
+
   logout() {
     this.apiService.logout();
     void this.router.navigate(['/']);

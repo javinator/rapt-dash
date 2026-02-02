@@ -1,5 +1,5 @@
 <div class="header">
-  <button (click)="navigateBack()" class="reload-button">
+  <button (click)="navigateBack()" class="nav-button">
     <mat-icon fontIcon="arrow_back"></mat-icon>
   </button>
   <h1>History</h1>
@@ -17,11 +17,12 @@
       ></rd-fermentation-details>
     } @else {
       @for (session of sessions(); track session.id) {
-        <div class="session-card">
-          <button class="history-button" (click)="loadHistory(session.id)">
-            <h4>{{ session.name }} ({{ session.start | date:'d MMM yy' }} - {{ session.end | date:'d MMM yy' }})</h4>
-          </button>
-        </div>
+        <button class="history-card" (click)="loadHistory(session.id)">
+          <h4>
+            {{ session.name }} ({{ session.start | date: 'd MMM yy' }} -
+            {{ session.end | date: 'd MMM yy' }})
+          </h4>
+        </button>
       }
     }
   }

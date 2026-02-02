@@ -1,0 +1,36 @@
+<div class="header">
+  <button (click)="navigateBack()" class="nav-button">
+    <mat-icon fontIcon="arrow_back"></mat-icon>
+  </button>
+  @if (!detailSession()) {
+    <button (click)="createSession()" class="nav-button">
+      <mat-icon fontIcon="library_add"></mat-icon>
+    </button>
+  }
+  <h1>Sessions</h1>
+</div>
+<div class="card">
+  @if (loading()) {
+    <rd-spinner></rd-spinner>
+  } @else {
+    @if (sessions().length === 0) {
+      <h4>No sessions yet!</h4>
+    } @else if (detailSession()) {
+      <rd-session-form
+        [session]="detailSession()"
+        (form)="this.saveSession($event)"
+      ></rd-session-form>
+    } @else {
+      <div>
+        @for (session of sessions(); track session.id) {
+          <button class="session-button" (click)="editSession(session.id)">
+              <h4>{{ session.name }}</h4>
+            ({{ session.start | date: 'd MMM yy' }} -
+            {{ session.end | date: 'd MMM yy' }})
+            <mat-icon fontIcon="edit_note"></mat-icon>
+          </button>
+        }
+      </div>
+    }
+  }
+</div>

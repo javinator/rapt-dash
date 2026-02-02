@@ -17,6 +17,11 @@ export const routes: Routes = [
       import('./pages/history/history.page').then((m) => m.HistoryPage),
   },
   {
+    path: 'session',
+    loadComponent: () =>
+      import('./pages/session/session.page').then((m) => m.SessionPage),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

@@ -6,11 +6,13 @@ import {
 } from '@angular/material/snack-bar';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
+    provideNativeDateAdapter(),
     { provide: MAT_SNACK_BAR_DATA, useValue: {} },
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
