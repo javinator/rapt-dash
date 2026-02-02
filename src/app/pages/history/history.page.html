@@ -10,10 +10,17 @@
   } @else {
     @if (sessions().length === 0) {
       <h4>No sessions yet!</h4>
+    } @else if (detailSession()) {
+      <rd-fermentation-details
+        [name]="detailSession()?.name ?? 'Unnamed'"
+        [telemetry]="detailTelemetry()"
+      ></rd-fermentation-details>
     } @else {
       @for (session of sessions(); track session.id) {
         <div class="session-card">
-          <h4>{{ session.name }} ({{ session.start | date:'d MMM yy' }} - {{ session.end | date:'d MMM yy' }})</h4>
+          <button class="history-button" (click)="loadHistory(session.id)">
+            <h4>{{ session.name }} ({{ session.start | date:'d MMM yy' }} - {{ session.end | date:'d MMM yy' }})</h4>
+          </button>
         </div>
       }
     }

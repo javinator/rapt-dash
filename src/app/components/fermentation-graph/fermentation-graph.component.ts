@@ -1,7 +1,11 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, OnInit } from '@angular/core';
 import { Telemetry } from '@models';
 import { AgChartsModule } from 'ag-charts-angular';
-import { AgChartOptions } from 'ag-charts-community';
+import {
+  AgChartOptions,
+  AllCommunityModule,
+  ModuleRegistry,
+} from 'ag-charts-community';
 
 @Component({
   selector: 'rd-fermentation-table',
@@ -9,7 +13,7 @@ import { AgChartOptions } from 'ag-charts-community';
   styleUrl: './fermentation-graph.component.scss',
   imports: [AgChartsModule],
 })
-export class FermentationGraphComponent {
+export class FermentationGraphComponent implements OnInit {
   telemetry = input.required<Telemetry[]>();
   maxTemp = computed(() => {
     return Math.max(...this.telemetry().map((tele) => tele.temperature ?? 0));
@@ -23,7 +27,7 @@ export class FermentationGraphComponent {
     for (let tele of this.telemetry()) {
       options.push({
         date: new Date(tele.date),
-        gravity: tele.gravity ? tele.gravity / 1000 : 0,
+        gravity: tele.gravity ? tele.gravity : 0,
         temperature: tele.temperature,
         rssi: tele.rssi,
       });
@@ -39,6 +43,9 @@ export class FermentationGraphComponent {
           unit: 'hour',
           interval: {
             step: 'day',
+          },
+          label: {
+            format: '%d.%m.%y',
           },
         },
         gravityAxis: {
@@ -100,4 +107,8 @@ export class FermentationGraphComponent {
       ],
     };
   });
+
+  ngOnInit() {
+    ModuleRegistry.registerModules([AllCommunityModule]);
+  }
 }

@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { firstValueFrom } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AllCommunityModule, ModuleRegistry } from 'ag-charts-community';
 
 @Component({
   selector: 'dashboard',
@@ -28,7 +27,6 @@ export class DashboardPage implements OnInit {
   telemetry = signal<Telemetry[]>([]);
 
   ngOnInit() {
-    ModuleRegistry.registerModules([AllCommunityModule]);
     this.initializeData();
   }
 
