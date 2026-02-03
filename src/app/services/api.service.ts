@@ -124,4 +124,55 @@ export class ApiService {
         }),
       );
   }
+
+  createSession(session: ProfileSession) {
+    return this.http
+      .post<Telemetry[]>(
+        'https://bier-freunde.ch/rest/rapt/api.php/session',
+        session,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Basic ' + this.cookieService.get('basic-auth'),
+          },
+        },
+      )
+      .pipe(
+        catchError((err) => {
+          this.snackBar.openFromComponent(AlertComponent, {
+            data: {
+              type: 'error',
+              text: 'Error saving session!',
+            } as Message,
+          });
+          console.warn(err);
+          return of([]);
+        }),
+      );
+  }
+
+  deleteSession(id: string) {
+    return this.http
+      .delete<Telemetry[]>(
+        'https://bier-freunde.ch/rest/rapt/api.php/session/' + id,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Basic ' + this.cookieService.get('basic-auth'),
+          },
+        },
+      )
+      .pipe(
+        catchError((err) => {
+          this.snackBar.openFromComponent(AlertComponent, {
+            data: {
+              type: 'error',
+              text: 'Error deleting session!',
+            } as Message,
+          });
+          console.warn(err);
+          return of([]);
+        }),
+      );
+  }
 }

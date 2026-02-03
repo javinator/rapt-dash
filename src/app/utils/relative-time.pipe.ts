@@ -10,7 +10,7 @@ import moment from 'moment';
   name: 'relativeTime',
 })
 export class RelativeTimePipe implements PipeTransform {
-  transform(value: Date): string {
+  transform(value: Date | string): string {
     const now = moment();
 
     const created = moment(value);

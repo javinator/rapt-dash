@@ -1,8 +1,10 @@
 <div class="header">
-  <button (click)="navigateBack()" class="nav-button">
-    <mat-icon fontIcon="arrow_back"></mat-icon>
-  </button>
   <h1>History</h1>
+  <div>
+    <button (click)="navigateBack()" class="nav-button">
+      <mat-icon fontIcon="arrow_back"></mat-icon>
+    </button>
+  </div>
 </div>
 <div class="card">
   @if (loading()) {
@@ -12,7 +14,7 @@
       <h4>No sessions yet!</h4>
     } @else if (detailSession()) {
       <rd-fermentation-details
-        [name]="detailSession()?.name ?? 'Unnamed'"
+        [session]="detailSession()!"
         [telemetry]="detailTelemetry()"
       ></rd-fermentation-details>
     } @else {

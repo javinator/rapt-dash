@@ -1,17 +1,23 @@
 import { Component, computed, input } from '@angular/core';
-import { Telemetry } from '@models';
+import { ProfileSession, Telemetry } from '@models';
 import { AgChartsModule } from 'ag-charts-angular';
 import { FermentationGraphComponent } from '../fermentation-graph/fermentation-graph.component';
 import { RelativeTimePipe } from '@utils';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'rd-fermentation-details',
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
-  imports: [AgChartsModule, FermentationGraphComponent, RelativeTimePipe],
+  imports: [
+    AgChartsModule,
+    FermentationGraphComponent,
+    RelativeTimePipe,
+    DatePipe,
+  ],
 })
 export class DetailsComponent {
-  name = input.required<string>();
+  session = input.required<ProfileSession>();
   telemetry = input.required<Telemetry[]>();
 
   isLargeScreen() {

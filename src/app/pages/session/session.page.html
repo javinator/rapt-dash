@@ -1,13 +1,19 @@
 <div class="header">
-  <button (click)="navigateBack()" class="nav-button">
-    <mat-icon fontIcon="arrow_back"></mat-icon>
-  </button>
-  @if (!detailSession()) {
-    <button (click)="createSession()" class="nav-button">
-      <mat-icon fontIcon="library_add"></mat-icon>
-    </button>
-  }
   <h1>Sessions</h1>
+  <div>
+    @if (!detailSession()) {
+      <button (click)="createSession()" class="nav-button">
+        <mat-icon fontIcon="library_add"></mat-icon>
+      </button>
+    } @else if (parseInt(detailSession()!.id) > 0) {
+      <button (click)="deleteSession()" class="nav-button">
+        <mat-icon fontIcon="delete"></mat-icon>
+      </button>
+    }
+    <button (click)="navigateBack()" class="nav-button">
+      <mat-icon fontIcon="arrow_back"></mat-icon>
+    </button>
+  </div>
 </div>
 <div class="card">
   @if (loading()) {

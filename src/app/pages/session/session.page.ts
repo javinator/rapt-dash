@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   AlertComponent,
+  ConfirmationDialogComponent,
   SessionFormComponent,
   SpinnerComponent,
 } from '@components';
@@ -11,6 +12,7 @@ import { firstValueFrom } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'session',
@@ -22,6 +24,7 @@ export class SessionPage implements OnInit {
   private readonly apiService = inject(ApiService);
   private readonly snackBar = inject(MatSnackBar);
   private readonly router = inject(Router);
+  readonly dialog = inject(MatDialog);
 
   loading = signal(true);
   sessions = signal<ProfileSession[]>([]);
@@ -42,7 +45,7 @@ export class SessionPage implements OnInit {
     firstValueFrom(this.apiService.getSessions()).then((sessions) => {
       console.debug('Sessions loaded!');
       this.sessions.set(sessions);
-      this.loading.set(false);
+      setTimeout(() => this.loading.set(false), 250);
     });
   }
 
@@ -62,16 +65,59 @@ export class SessionPage implements OnInit {
     this.detailSession.set({ id: '-1', name: '' });
   }
 
-  saveSession(session: any) {
-    // TODO: implement save
+  saveSession(sessionDto: any) {
     this.loading.set(true);
-    console.log(session);
-    this.snackBar.openFromComponent(AlertComponent, {
-      data: { type: 'info', text: 'Save not yet implemented' } as Message,
-    });
-    setTimeout(() => {
+    let session: ProfileSession = {
+      id: sessionDto.id,
+      name: sessionDto.name,
+      start: sessionDto.startDate + ' ' + sessionDto.startTime,
+      end: sessionDto.endTime
+        ? sessionDto.endDate + ' ' + sessionDto.endTime
+        : undefined,
+    };
+
+    firstValueFrom(this.apiService.createSession(session)).then(() => {
+      this.snackBar.openFromComponent(AlertComponent, {
+        data: {
+          type: 'success',
+          text: 'Session successfully saved!',
+        } as Message,
+      });
+      this.initializeData();
       this.detailSession.set(undefined);
-      this.loading.set(false);
-    }, 250);
+    });
   }
+
+  deleteSession() {
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        width: '400px',
+        data: {
+          title: 'Delete Session?',
+          description:
+            "Do you really want to delete session '" +
+            this.detailSession()?.name +
+            "'?",
+        },
+      })
+      .afterClosed()
+      .subscribe((result: boolean) => {
+        if (result) {
+          firstValueFrom(
+            this.apiService.deleteSession(this.detailSession()!.id),
+          ).then(() => {
+            this.snackBar.openFromComponent(AlertComponent, {
+              data: {
+                type: 'success',
+                text: 'Session successfully deleted!',
+              } as Message,
+            });
+            this.initializeData();
+            this.detailSession.set(undefined);
+          });
+        }
+      });
+  }
+
+  protected readonly parseInt = parseInt;
 }

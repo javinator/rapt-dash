@@ -36,7 +36,6 @@ button {
   padding: 6px;
   border-radius: 6px;
   margin: 16px auto;
-  min-width: 64px;
   border: 2px solid #CCC;
   cursor: pointer;
   background-color: #DDD;
@@ -64,9 +63,17 @@ button.secondary {
   border: 2px solid #F52;
 }
 
+.header {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .nav-button {
-  float: right;
-  margin: 0 0 0 4px;
+  margin: 3px;
+  width: 48px;
+  height: 48px;
 }
 
 h1 {

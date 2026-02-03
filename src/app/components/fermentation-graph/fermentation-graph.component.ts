@@ -40,9 +40,8 @@ export class FermentationGraphComponent implements OnInit {
       axes: {
         x: {
           type: 'unit-time',
-          unit: 'hour',
-          interval: {
-            step: 'day',
+          parentLevel: {
+            enabled: false,
           },
           label: {
             format: '%d.%m.%y',
@@ -50,6 +49,9 @@ export class FermentationGraphComponent implements OnInit {
         },
         gravityAxis: {
           position: 'left',
+          label: {
+            format: '#{.3f}',
+          },
         },
         temperatureAxis: {
           position: 'right',
@@ -57,6 +59,9 @@ export class FermentationGraphComponent implements OnInit {
           max: Math.round(this.maxTemp()) + 2,
           gridLine: {
             enabled: false,
+          },
+          label: {
+            format: '#{.1f} °C',
           },
         },
         rssiAxis: {

@@ -1,6 +1,7 @@
 <form #f="ngForm" (ngSubmit)="submitForm(f)" ngNativeValidate>
+  <input type="hidden" name="id" [ngModel]="session()?.id">
+  <label for="name">Session Name:</label>
   <div>
-    <label for="name">Session Name:</label>
     <input
       id="name"
       [ngModel]="session()?.name"
@@ -9,36 +10,36 @@
       type="text"
     />
   </div>
+  <label for="startDate">Start:</label>
   <div class="date-time">
-    <label for="start-date">Start:</label>
     <input
-      id="start-date"
+      id="startDate"
       [ngModel]="session()?.start?.toString()?.slice(0, 10)"
-      name="start-date"
+      name="startDate"
       required
       type="date"
     />
     <input
-      id="start-time"
+      id="startTime"
       [ngModel]="session()?.start?.toString()?.slice(11, 16)"
-      name="start-time"
+      name="startTime"
       required
       type="time"
       step="60"
     />
   </div>
+  <label for="end-date">End:</label>
   <div class="date-time">
-    <label for="end-date">End:</label>
     <input
-      id="end-date"
+      id="endDate"
       [ngModel]="session()?.end?.toString()?.slice(0, 10)"
-      name="end-date"
+      name="endDate"
       type="date"
     />
     <input
-      id="end-time"
+      id="endTime"
       [ngModel]="session()?.end?.toString()?.slice(11, 16)"
-      name="end-time"
+      name="endTime"
       type="time"
       step="60"
     />
