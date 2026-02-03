@@ -2,9 +2,9 @@
   {{ session().name }}
 </h2>
 @if (session().end) {
-  {{ session().start | date: 'dd.MM.yyyy' }} - {{ session().end | date: 'dd.MM.yyyy' }}
+  {{ session().start | date: 'dd/MM/yyyy' }} - {{ session().end | date: 'dd/MM/yyyy' }}
 } @else {
-  started {{ session().start | date: 'dd.MM.yyyy, HH:mm' }}
+  started {{ session().start | date: 'dd/MM/yyyy, HH:mm' }}
 }
 @if (telemetry().length > 0) {
   @if (!session().end) {

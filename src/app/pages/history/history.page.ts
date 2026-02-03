@@ -10,13 +10,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { firstValueFrom } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'history',
   templateUrl: './history.page.html',
   styleUrl: './history.page.scss',
-  imports: [SpinnerComponent, MatIconModule, DatePipe, DetailsComponent],
+  imports: [
+    SpinnerComponent,
+    MatIconModule,
+    DatePipe,
+    DetailsComponent,
+    DecimalPipe,
+  ],
 })
 export class HistoryPage implements OnInit {
   private readonly apiService = inject(ApiService);

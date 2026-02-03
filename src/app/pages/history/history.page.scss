@@ -1,7 +1,15 @@
 .inline {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+}
+
+.inline h4 {
+  width: 50%;
+}
+
+.inline span {
+  flex-grow: 1;
 }
 
 .header {

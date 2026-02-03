@@ -19,11 +19,17 @@
       ></rd-fermentation-details>
     } @else {
       @for (session of sessions(); track session.id) {
-        <button class="history-card" (click)="loadHistory(session.id)">
+        <button class="history-card inline" (click)="loadHistory(session.id)">
           <h4>
-            {{ session.name }} ({{ session.start | date: 'd MMM yy' }} -
-            {{ session.end | date: 'd MMM yy' }})
+            {{ session.name }}
           </h4>
+          <span>
+            {{ session.start | date: 'dd/MM/yyyy' }} -
+            {{ session.end | date: 'dd/MM/yyyy' }}</span>
+          <span>OG: {{ session.originalGravity | number:'1.3-3' }}, FG: {{ session.finalGravity | number:'1.3-3' }} </span>
+          @if (session.originalGravity && session.finalGravity) {
+            <span>Attenuation: {{ (((session.originalGravity - session.finalGravity) / (session.originalGravity - 1)) * 100) | number:'1.1-1' }}% </span>
+          }
         </button>
       }
     }

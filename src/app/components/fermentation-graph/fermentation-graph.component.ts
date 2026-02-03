@@ -39,12 +39,29 @@ export class FermentationGraphComponent implements OnInit {
       },
       axes: {
         x: {
-          type: 'unit-time',
+          type: 'time',
+          nice: false,
           parentLevel: {
             enabled: false,
           },
           label: {
-            format: '%d.%m.%y',
+            format: '%d/%m/%y',
+            autoRotate: true,
+          },
+          interval: {
+            step: {
+              unit: 'day',
+            },
+          },
+          gridLine: {
+            style: [
+              {}, //empty object for an unshaded band
+              {
+                fill: '#999',
+                fillOpacity: 0.1,
+                strokeWidth: 0,
+              },
+            ],
           },
         },
         gravityAxis: {
@@ -85,6 +102,19 @@ export class FermentationGraphComponent implements OnInit {
           marker: {
             fill: '#03B',
           },
+          tooltip: {
+            renderer: function ({ datum, xKey, yKey, yName }) {
+              return {
+                heading: datum[xKey].toLocaleString(),
+                data: [
+                  {
+                    label: yName || '',
+                    value: datum[yKey].toFixed(4),
+                  },
+                ],
+              };
+            },
+          },
         },
         {
           type: 'line',
@@ -95,6 +125,19 @@ export class FermentationGraphComponent implements OnInit {
           stroke: '#F52',
           marker: {
             fill: '#F52',
+          },
+          tooltip: {
+            renderer: function ({ datum, xKey, yKey, yName }) {
+              return {
+                heading: datum[xKey].toLocaleString(),
+                data: [
+                  {
+                    label: yName || '',
+                    value: datum[yKey].toFixed(1) + ' °C',
+                  },
+                ],
+              };
+            },
           },
         },
         {
@@ -107,6 +150,19 @@ export class FermentationGraphComponent implements OnInit {
           showInLegend: false,
           marker: {
             enabled: false,
+          },
+          tooltip: {
+            renderer: function ({ datum, xKey, yKey, yName }) {
+              return {
+                heading: datum[xKey].toLocaleString(),
+                data: [
+                  {
+                    label: yName || '',
+                    value: datum[yKey].toFixed(0) + ' dB',
+                  },
+                ],
+              };
+            },
           },
         },
       ],

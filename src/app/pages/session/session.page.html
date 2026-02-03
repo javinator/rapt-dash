@@ -31,8 +31,12 @@
         @for (session of sessions(); track session.id) {
           <button class="session-button" (click)="editSession(session.id)">
               <h4>{{ session.name }}</h4>
-            ({{ session.start | date: 'd MMM yy' }} -
-            {{ session.end | date: 'd MMM yy' }})
+            @if (session.end) {
+              ({{ session.start | date: 'dd/MM/yyyy' }} -
+              {{ session.end | date: 'dd/MM/yyyy' }})
+            } @else {
+              (active)
+            }
             <mat-icon fontIcon="edit_note"></mat-icon>
           </button>
         }

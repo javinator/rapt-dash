@@ -3,6 +3,6 @@ export interface ProfileSession {
   id: string;
   start?: Date | string;
   end?: Date | string;
-  originalGravity?: 0;
-  finalGravity?: 0;
+  originalGravity?: number;
+  finalGravity?: number;
 }
