@@ -2,7 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import { ProfileSession, Telemetry } from '@models';
 import { AgChartsModule } from 'ag-charts-angular';
 import { FermentationGraphComponent } from '../fermentation-graph/fermentation-graph.component';
-import { RelativeTimePipe } from '@utils';
+import { DateUtil, RelativeTimePipe } from '@utils';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -19,6 +19,8 @@ import { DatePipe } from '@angular/common';
 export class DetailsComponent {
   session = input.required<ProfileSession>();
   telemetry = input.required<Telemetry[]>();
+
+  isActive = computed(() => DateUtil.isActive(this.session().end));
 
   isLargeScreen() {
     return (

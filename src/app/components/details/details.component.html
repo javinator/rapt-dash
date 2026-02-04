@@ -1,13 +1,13 @@
 <h2>
   {{ session().name }}
 </h2>
-@if (session().end) {
-  {{ session().start | date: 'dd/MM/yyyy' }} - {{ session().end | date: 'dd/MM/yyyy' }}
-} @else {
+@if (isActive()) {
   started {{ session().start | date: 'dd/MM/yyyy, HH:mm' }}
+} @else {
+  {{ session().start | date: 'dd/MM/yyyy' }} - {{ session().end | date: 'dd/MM/yyyy' }}
 }
 @if (telemetry().length > 0) {
-  @if (!session().end) {
+  @if (isActive()) {
   <h3 class="inline">
     @if (lastTelemetry().gravity) {
       <span>Gravity: {{ lastTelemetry().gravity!.toFixed(3) }}</span>

@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+import { DateUtil } from '@utils';
 
 @Component({
   selector: 'session',
@@ -25,6 +26,9 @@ export class SessionPage implements OnInit {
   private readonly snackBar = inject(MatSnackBar);
   private readonly router = inject(Router);
   readonly dialog = inject(MatDialog);
+
+  protected readonly parseInt = parseInt;
+  protected readonly DateUtil = DateUtil;
 
   loading = signal(true);
   sessions = signal<ProfileSession[]>([]);
@@ -118,6 +122,4 @@ export class SessionPage implements OnInit {
         }
       });
   }
-
-  protected readonly parseInt = parseInt;
 }

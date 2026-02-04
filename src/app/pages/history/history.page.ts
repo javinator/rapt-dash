@@ -11,6 +11,7 @@ import { firstValueFrom } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DatePipe, DecimalPipe } from '@angular/common';
+import { DateUtil } from '@utils';
 
 @Component({
   selector: 'history',
@@ -48,7 +49,9 @@ export class HistoryPage implements OnInit {
     }
     firstValueFrom(this.apiService.getSessions()).then((sessions) => {
       console.debug('Sessions loaded!');
-      this.sessions.set(sessions.filter((session) => session.end));
+      this.sessions.set(
+        sessions.filter((session) => !DateUtil.isActive(session.end)),
+      );
       this.loading.set(false);
     });
   }
