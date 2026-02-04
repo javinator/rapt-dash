@@ -1,18 +1,22 @@
 <div class="header">
   <h1>Rapt Dashboard</h1>
-  <div>
-    <button (click)="openSessions()" class="nav-button" title="Edit Sessions">
-      <mat-icon fontIcon="event"></mat-icon>
-    </button>
-    <button (click)="openHistory()" class="nav-button" title="Open History">
-      <mat-icon fontIcon="history"></mat-icon>
-    </button>
-    <button (click)="reloadData()" class="nav-button" title="Reload Dashboard">
-      <mat-icon fontIcon="refresh"></mat-icon>
-    </button>
-    <button (click)="logout()" class="nav-button" title="Logout">
-      <mat-icon fontIcon="logout"></mat-icon>
-    </button>
+  <div class="inline">
+    <div>
+      <button (click)="openSessions()" class="nav-button" title="Edit Sessions">
+        <mat-icon fontIcon="event"></mat-icon>
+      </button>
+      <button (click)="openHistory()" class="nav-button" title="Open History">
+        <mat-icon fontIcon="history"></mat-icon>
+      </button>
+    </div>
+    <div>
+      <button (click)="reloadData()" class="nav-button" title="Reload Dashboard">
+        <mat-icon fontIcon="refresh"></mat-icon>
+      </button>
+      <button (click)="logout()" class="nav-button" title="Logout">
+        <mat-icon fontIcon="logout"></mat-icon>
+      </button>
+    </div>
   </div>
 </div>
 <div class="card">

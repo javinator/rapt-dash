@@ -1,9 +1,11 @@
-.inline {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.header h1 {
+  flex-shrink: 0;
 }
 
-.header {
-  text-align: left;
+.inline {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
 }

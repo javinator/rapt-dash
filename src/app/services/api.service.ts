@@ -38,7 +38,9 @@ export class ApiService {
         this.snackBar.openFromComponent(AlertComponent, {
           data: { type: 'success', text: 'Login successful!' } as Message,
         });
-        this.cookieService.set('basic-auth', btoa(email + ':' + password));
+        this.cookieService.set('basic-auth', btoa(email + ':' + password), {
+          expires: 7,
+        });
       }
       return success;
     } catch (e) {
