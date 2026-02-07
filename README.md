@@ -15,7 +15,7 @@ session, as well as past sessions. New sessions can be added and old ones delete
 
 #### RAPT Webhook
 
-Data from the RAPT Cloud has to be sent to https://bier-freunde.ch/rest/rapt/telemetry.php. The payload should look like this:
+Data from the RAPT Cloud has to be sent to https://bier-freunde.ch/rest/rapt/telemetry.php. The payload for the webhook should look like this:
 
 ```
 {
@@ -27,6 +27,9 @@ Data from the RAPT Cloud has to be sent to https://bier-freunde.ch/rest/rapt/tel
   "rssi": "@rssi"
 }
 ```
+
+If you want to use my backend, just email me, and I'll generate a api_key for you.
+
 ### v1 - RAPT API
 
 The performance of the RAPT API is not really what it should be and the CORS header are not correctly set
