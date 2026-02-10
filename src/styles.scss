@@ -80,3 +80,12 @@ h1 {
   margin-left: 4px;
   margin-right: 4px;
 }
+
+a, a:visited {
+  color: #03B;
+  transition: 0.2s;
+}
+
+a:hover {
+  color: #37F;
+}

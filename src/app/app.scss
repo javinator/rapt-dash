@@ -1,7 +1,23 @@
-.content {
+#content {
   padding: 12px;
   min-width: 360px;
   max-width: 1440px;
-  margin: 24px auto auto;
+  margin: 32px auto auto;
   text-align: center;
+}
+
+#footer {
+  display: flex;
+  gap: 12px;
+  background-color: #EEE;
+  padding: 6px 12px;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  border-radius: 6px;
+  box-shadow: 1px 1px 4px #777;
+
+  @media (max-width: 720px) {
+    display: none;
+  }
 }

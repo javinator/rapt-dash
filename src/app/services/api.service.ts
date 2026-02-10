@@ -40,6 +40,7 @@ export class ApiService {
         });
         this.cookieService.set('basic-auth', btoa(email + ':' + password), {
           expires: 7,
+          secure: true,
         });
       }
       return success;
