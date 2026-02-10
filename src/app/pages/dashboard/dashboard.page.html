@@ -22,6 +22,8 @@
 <div class="card">
   @if (loading()) {
     <rd-spinner></rd-spinner>
+  } @else if (!session()) {
+    <p class="no-data">No data yet!</p>
   } @else {
     <rd-fermentation-details
       [session]="session()!"

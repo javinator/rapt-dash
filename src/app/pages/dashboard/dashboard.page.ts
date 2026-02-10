@@ -39,13 +39,18 @@ export class DashboardPage implements OnInit {
       return;
     }
     firstValueFrom(this.apiService.getLastSession()).then((session) => {
-      console.debug('Session loaded!');
       this.session.set(session);
-      this.apiService.getTelemetry(session.id).subscribe((tele) => {
-        console.debug('Telemetry loaded!');
-        this.telemetry.set(tele);
-        this.loading.set(false);
-      });
+      if (session?.id) {
+        console.debug('Session loaded!');
+        this.apiService.getTelemetry(session.id).subscribe((tele) => {
+          console.debug('Telemetry loaded!');
+          this.telemetry.set(tele);
+          this.loading.set(false);
+        });
+      } else {
+        console.debug('No sessions found!');
+        setTimeout(() => this.loading.set(false), 200);
+      }
     });
   }
 
