@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import moment from 'moment';
 
 /**
  * This pipe transforms date strings into human-readable relative time formats.
@@ -10,29 +9,28 @@ import moment from 'moment';
   name: 'relativeTime',
 })
 export class RelativeTimePipe implements PipeTransform {
-  transform(value: Date | string): string {
-    const now = moment();
+  transform(value: Date | string, now: number): string {
+    const diff = now - new Date(value).getTime();
+    const minutes = Math.floor(diff / 60000);
 
-    const created = moment(value);
-
-    const diff = now.diff(created, 'days');
-
-    if (diff < 1) {
-      if (now.diff(created, 'minutes') < 1) {
-        return 'now';
-      }
-
-      if (now.diff(created, 'hours') < 1) {
-        return `${now.diff(created, 'minutes')}min ago`;
-      }
-
-      return `${now.diff(created, 'hours')}h ago`;
-    } else if (diff === 1) {
-      return 'Yesterday';
-    } else if (diff < 7) {
-      return `${diff} days ago`;
-    } else {
-      return created.format('MMM D, YYYY');
+    if (minutes < 1) {
+      return 'just now';
     }
+
+    if (minutes < 60) {
+      return `${minutes}min ago`;
+    }
+
+    const hours = Math.floor(minutes / 60);
+
+    if (hours < 24) {
+      return `${hours}h ago`;
+    }
+
+    if (hours < 36) {
+      return 'yesterday';
+    }
+
+    return new Date(value).toLocaleString();
   }
 }

@@ -31,7 +31,7 @@
       <span>Signal: {{ lastTelemetry().rssi }} dB</span> &nbsp; - &nbsp;
     }
     @if (lastTelemetry().date) {
-      <span>Last Telemetry: {{ lastTelemetry().date | relativeTime }}</span>
+      <span>Last Telemetry: {{ lastTelemetry().date | relativeTime: now() }}</span>
     }
   </h4>
   @if (isLargeScreen()) {

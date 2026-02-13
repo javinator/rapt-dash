@@ -1,4 +1,11 @@
-import { Component, computed, input } from '@angular/core';
+import {
+  Component,
+  computed,
+  input,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { ProfileSession, Telemetry } from '@models';
 import { AgChartsModule } from 'ag-charts-angular';
 import { FermentationGraphComponent } from '../fermentation-graph/fermentation-graph.component';
@@ -16,11 +23,24 @@ import { DatePipe } from '@angular/common';
     DatePipe,
   ],
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit, OnDestroy {
   session = input.required<ProfileSession>();
   telemetry = input.required<Telemetry[]>();
 
   isActive = computed(() => DateUtil.isActive(this.session().end));
+
+  readonly now = signal(Date.now());
+  private intervalId!: number;
+
+  ngOnInit() {
+    this.intervalId = window.setInterval(() => {
+      this.now.set(Date.now());
+    }, 60000); // update every minute
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
 
   isLargeScreen() {
     return (
