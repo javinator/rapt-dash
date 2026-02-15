@@ -46,7 +46,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     return (
       (window.innerWidth ||
         document.documentElement.clientWidth ||
-        document.body.clientWidth) > 1200
+        document.body.clientWidth) > 1000
     );
   }
 

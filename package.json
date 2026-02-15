@@ -1,6 +1,6 @@
 {
   "name": "rapt-dash",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
@@ -39,7 +39,7 @@
     "@angular/cli": "^21.1.1",
     "@angular/compiler-cli": "^21.1.0",
     "@angular/material": "^21.1.1",
-    "jsdom": "^27.1.0",
+    "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "^5.9.2",
     "vitest": "^4.0.8"
