@@ -10,6 +10,7 @@ import {
   templateUrl: './confirmation-dialog.component.html',
   styleUrl: './confirmation-dialog.component.scss',
   imports: [MatDialogModule],
+  standalone: true,
 })
 export class ConfirmationDialogComponent {
   readonly data = inject<{ title: string; description: string }>(

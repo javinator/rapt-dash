@@ -6,16 +6,19 @@ For the first version I tried to use the RAPT Rest API, but soon gave up and mad
 
 ## Features
 
-### v2 - Data via RAPT Webhook
+### v2 - Data via RAPT Webhook or Home Assistant
 
-Data can be sent from the RAPT Cloud portal via Webhooks to my backend. The dashboard then displays the active fermentation
-session, as well as past sessions. New sessions can be added and old ones deleted.
+Data can be sent from the RAPT Cloud portal via Webhooks to my backend or using a Home Assistant integration
+(I use it with a raspberry Pi to get the Bluetooth data of the pill).
+The dashboard then displays the active fermentation session, as well as past sessions.
+New sessions can be added and old ones deleted.
 
 ![dashboard screenshot](public/screenshot.png)
 
-#### RAPT Webhook
+#### API call
 
-Data from the RAPT Cloud has to be sent to https://bier-freunde.ch/rest/rapt/telemetry.php. The payload for the webhook should look like this:
+Data has to be sent to https://bier-freunde.ch/rest/rapt/telemetry.php. The payload for the POST call
+(webhook or restful command) should look like this:
 
 ```
 {
@@ -29,6 +32,34 @@ Data from the RAPT Cloud has to be sent to https://bier-freunde.ch/rest/rapt/tel
 ```
 
 If you want to use my backend, just email me, and I'll generate a api_key for you.
+
+##### Using Home Assistant
+
+After using the RAPT webhook for a while, I decided to opt for the Home Assistant integration, as the RAPT webhook
+relies on the RAPT cloud being operational, and I observed it being down or unreachable a few times. The Home Assistant
+integration is completely independent of the RAPT portal, so I don't rely on Kegland having their servers operational.
+
+Change the Telemetry method of your RAPT pill to bluetooth. Your Home Assistant should then pick up the bluetooth
+signal of the pill and ask if you want to add the RAPT integration. After adding the integration,
+add the following Restful command to your configuration.yaml
+
+```
+rest_command:
+  send_rapt_telemetry:
+    url: "https://bier-freunde.ch/rest/rapt/telemetry.php"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    payload: >
+      {
+        "mail": $your-email,
+        "api_key": $your-api-key,
+        "temperature": "{{ states('sensor.rapt_pill_temperature') | float }}",
+        "gravity": "{{ states('sensor.rapt_pill_specific_gravity') | float }}",
+        "battery": "{{ states('sensor.rapt_pill_battery') | float }}",
+        "rssi": "{{ states('sensor.rapt_pill_signal_strength') | float }}"
+      }
+```
 
 ### v1 - RAPT API
 

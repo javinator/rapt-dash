@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
   imports: [SpinnerComponent, MatIconModule, LoginComponent],
+  standalone: true,
 })
 export class HomePage implements OnInit {
   loading = signal(true);

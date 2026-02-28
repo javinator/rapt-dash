@@ -6,6 +6,7 @@ import { FormsModule, NgForm } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   imports: [FormsModule],
+  standalone: true,
 })
 export class LoginComponent {
   formLogin = output<{ username: string; apiToken: string }>();

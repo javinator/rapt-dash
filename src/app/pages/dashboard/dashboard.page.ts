@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.page.html',
   styleUrl: './dashboard.page.scss',
   imports: [SpinnerComponent, MatIconModule, DetailsComponent],
+  standalone: true,
 })
 export class DashboardPage implements OnInit {
   private readonly apiService = inject(ApiService);

@@ -22,6 +22,7 @@ import { DatePipe } from '@angular/common';
     RelativeTimePipe,
     DatePipe,
   ],
+  standalone: true,
 })
 export class DetailsComponent implements OnInit, OnDestroy {
   session = input.required<ProfileSession>();

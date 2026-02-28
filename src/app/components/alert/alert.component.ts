@@ -8,6 +8,7 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
   templateUrl: './alert.component.html',
   styleUrl: './alert.component.scss',
   imports: [MatIconModule],
+  standalone: true,
 })
 export class AlertComponent {
   message: Message = inject(MAT_SNACK_BAR_DATA);

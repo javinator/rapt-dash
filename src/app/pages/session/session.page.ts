@@ -20,6 +20,7 @@ import { DateUtil } from '@utils';
   templateUrl: './session.page.html',
   styleUrl: './session.page.scss',
   imports: [SpinnerComponent, MatIconModule, DatePipe, SessionFormComponent],
+  standalone: true,
 })
 export class SessionPage implements OnInit {
   private readonly apiService = inject(ApiService);

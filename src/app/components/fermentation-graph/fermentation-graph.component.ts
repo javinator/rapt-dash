@@ -12,6 +12,7 @@ import {
   templateUrl: './fermentation-graph.component.html',
   styleUrl: './fermentation-graph.component.scss',
   imports: [AgChartsModule],
+  standalone: true,
 })
 export class FermentationGraphComponent implements OnInit {
   telemetry = input.required<Telemetry[]>();

@@ -24,6 +24,7 @@ import { DateUtil } from '@utils';
     DetailsComponent,
     DecimalPipe,
   ],
+  standalone: true,
 })
 export class HistoryPage implements OnInit {
   private readonly apiService = inject(ApiService);
