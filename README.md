@@ -4,7 +4,11 @@ A better dashboard for the [Rapt Pill](https://kegland.eu/products/yellow-rapt-p
 
 For the first version I tried to use the RAPT Rest API, but soon gave up and made my own backend. 
 
+The dashboard is available here: https://rapt.bier-freunde.ch.
+
 ## Features
+
+![dashboard screenshot](public/screenshot.png)
 
 ### v2 - Data via RAPT Webhook or Home Assistant
 
@@ -12,8 +16,6 @@ Data can be sent from the RAPT Cloud portal via Webhooks to my backend or using 
 (I use it with a raspberry Pi to get the Bluetooth data of the pill).
 The dashboard then displays the active fermentation session, as well as past sessions.
 New sessions can be added and old ones deleted.
-
-![dashboard screenshot](public/screenshot.png)
 
 #### API call
 
@@ -33,7 +35,7 @@ Data has to be sent to https://bier-freunde.ch/rest/rapt/telemetry.php. The payl
 
 If you want to use my backend, just email me, and I'll generate a api_key for you.
 
-##### Using Home Assistant
+#### Using Home Assistant
 
 After using the RAPT webhook for a while, I decided to opt for the Home Assistant integration, as the RAPT webhook
 relies on the RAPT cloud being operational, and I observed it being down or unreachable a few times. The Home Assistant
