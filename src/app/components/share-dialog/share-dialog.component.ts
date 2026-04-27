@@ -43,7 +43,7 @@ export class ShareDialogComponent {
   }
 
   copy() {
-    this.clipboard.copy('https://rapt.bier-freunde.ch/' + this.share());
+    this.clipboard.copy('https://rapt.bier-freunde.ch/share/' + this.share());
     this.snackBar.openFromComponent(AlertComponent, {
       data: { type: 'info', text: 'Link copied to clipboard' } as Message,
     });
