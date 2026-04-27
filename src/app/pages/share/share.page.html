@@ -1,0 +1,19 @@
+<div class="header">
+  <h1>Rapt Dashboard</h1>
+  <div class="inline"></div>
+</div>
+<div class="card">
+  @if (loading()) {
+    <rd-spinner></rd-spinner>
+  } @else if (!session()) {
+    <p class="no-data">
+      There is no data for this shared session. Please double check the shared
+      link.
+    </p>
+  } @else {
+    <rd-fermentation-details
+      [session]="session()!"
+      [telemetry]="session()!.telemetry"
+    ></rd-fermentation-details>
+  }
+</div>

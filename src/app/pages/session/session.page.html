@@ -6,6 +6,9 @@
         <mat-icon fontIcon="library_add"></mat-icon>
       </button>
     } @else if (parseInt(detailSession()!.id) > 0) {
+      <button (click)="shareSession()" class="nav-button">
+        <mat-icon fontIcon="share"></mat-icon>
+      </button>
       <button (click)="deleteSession()" class="nav-button">
         <mat-icon fontIcon="delete"></mat-icon>
       </button>

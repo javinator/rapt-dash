@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DateUtil } from '@utils';
+import { ShareDialogComponent } from '../../components/share-dialog/share-dialog.component';
 
 @Component({
   selector: 'session',
@@ -120,6 +121,61 @@ export class SessionPage implements OnInit {
             this.initializeData();
             this.detailSession.set(undefined);
           });
+        }
+      });
+  }
+
+  shareSession() {
+    this.dialog
+      .open(ShareDialogComponent, {
+        width: '99%',
+        maxWidth: '1200px',
+        data: {
+          session: this.detailSession()?.name,
+          share: this.detailSession()?.share,
+        },
+      })
+      .afterClosed()
+      .subscribe((result: string) => {
+        this.loading.set(true);
+        if (result === undefined || result === null) {
+          this.loading.set(false);
+        } else if (result.length === 0) {
+          firstValueFrom(
+            this.apiService.deleteSharedLink(this.detailSession()!.id),
+          )
+            .then(() => {
+              console.log('Share deleted');
+              this.detailSession()!.share = undefined;
+              this.snackBar.openFromComponent(AlertComponent, {
+                data: {
+                  type: 'success',
+                  text: 'Share successfully deleted!',
+                } as Message,
+              });
+              setTimeout(() => this.loading.set(false), 200);
+            })
+            .catch(() => {
+              setTimeout(() => this.loading.set(false), 500);
+            });
+        } else {
+          firstValueFrom(
+            this.apiService.setSharedLink(this.detailSession()!.id, result),
+          )
+            .then((result) => {
+              console.log('New share uuid: ' + result.share);
+              this.detailSession()!.share = result.share;
+              this.snackBar.openFromComponent(AlertComponent, {
+                data: {
+                  type: 'success',
+                  text: 'Share successfully saved!',
+                } as Message,
+              });
+              setTimeout(() => this.loading.set(false), 200);
+            })
+            .catch(() => {
+              setTimeout(() => this.loading.set(false), 500);
+            });
         }
       });
   }

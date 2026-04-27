@@ -5,6 +5,7 @@ import { Message, ProfileSession, Telemetry } from '@models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertComponent } from '@components';
 import { CookieService } from 'ngx-cookie-service';
+import { SharedSession } from '../models/shared-session.model';
 
 @Injectable({
   providedIn: 'root',
@@ -175,6 +176,79 @@ export class ApiService {
           });
           console.warn(err);
           return of([]);
+        }),
+      );
+  }
+
+  getSharedSession(share: string): Observable<SharedSession> {
+    return this.http
+      .get<SharedSession>(
+        'https://bier-freunde.ch/rest/rapt/share.php/' + share,
+      )
+      .pipe(
+        catchError((err) => {
+          this.snackBar.openFromComponent(AlertComponent, {
+            data: {
+              type: 'error',
+              text: 'Error fetching shared Session!',
+            } as Message,
+          });
+          console.warn(err);
+          return of();
+        }),
+      );
+  }
+
+  setSharedLink(id: string, share: string) {
+    return this.http
+      .post<{ share: string }>(
+        'https://bier-freunde.ch/rest/rapt/share.php',
+        {
+          id,
+          share,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Basic ' + this.cookieService.get('basic-auth'),
+          },
+        },
+      )
+      .pipe(
+        catchError((err) => {
+          this.snackBar.openFromComponent(AlertComponent, {
+            data: {
+              type: 'error',
+              text: 'Error saving shared Session!',
+            } as Message,
+          });
+          console.warn(err);
+          return of();
+        }),
+      );
+  }
+
+  deleteSharedLink(id: string) {
+    return this.http
+      .delete('https://bier-freunde.ch/rest/rapt/share.php', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Basic ' + this.cookieService.get('basic-auth'),
+        },
+        body: {
+          id,
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          this.snackBar.openFromComponent(AlertComponent, {
+            data: {
+              type: 'error',
+              text: 'Error deleting shared Session!',
+            } as Message,
+          });
+          console.warn(err);
+          return of();
         }),
       );
   }

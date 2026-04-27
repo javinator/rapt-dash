@@ -11,6 +11,7 @@ import { AgChartsModule } from 'ag-charts-angular';
 import { FermentationGraphComponent } from '../fermentation-graph/fermentation-graph.component';
 import { DateUtil, RelativeTimePipe } from '@utils';
 import { DatePipe } from '@angular/common';
+import { SharedSession } from '../../models/shared-session.model';
 
 @Component({
   selector: 'rd-fermentation-details',
@@ -25,7 +26,7 @@ import { DatePipe } from '@angular/common';
   standalone: true,
 })
 export class DetailsComponent implements OnInit, OnDestroy {
-  session = input.required<ProfileSession>();
+  session = input.required<ProfileSession | SharedSession>();
   telemetry = input.required<Telemetry[]>();
 
   isActive = computed(() => DateUtil.isActive(this.session().end));

@@ -1,0 +1,16 @@
+.header h1 {
+  flex-shrink: 0;
+}
+
+.inline {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.no-data {
+  margin: 75px 0;
+  height: 48px;
+}

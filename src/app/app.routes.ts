@@ -22,6 +22,11 @@ export const routes: Routes = [
       import('./pages/session/session.page').then((m) => m.SessionPage),
   },
   {
+    path: 'share/:uid',
+    loadComponent: () =>
+      import('./pages/share/share.page').then((m) => m.SharePage),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

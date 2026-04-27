@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Shared Link</h2>
+<mat-dialog-content>
+  <p>
+    Here you can generate a link, so that the session '{{ data.session }}' can be viewed publicly.
+  </p>
+  <div class="link">
+    @if (share()) {
+      <p>https://rapt.bier-freunde.ch/share/{{ share() }}</p>
+      <button (click)="copy()" class="action" title="Copy Link">
+        <mat-icon fontIcon="content_paste"></mat-icon>
+      </button>
+
+      <button (click)="generate()" class="action" title="Generate new Link">
+        <mat-icon fontIcon="cached"></mat-icon>
+      </button>
+      <button (click)="delete()" class="action" title="Delete Link">
+        <mat-icon fontIcon="delete_forever"></mat-icon>
+      </button>
+    } @else {
+      <p><i>Session not shared yet</i></p>
+      <button (click)="generate()" class="action" title="Generate new Link">
+        <mat-icon fontIcon="cached"></mat-icon>
+      </button>
+    }
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="primary" (click)="confirm(true)">Save</button>
+  <button class="secondary" (click)="confirm(false)">Cancel</button>
+</mat-dialog-actions>
