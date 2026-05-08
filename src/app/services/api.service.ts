@@ -190,6 +190,10 @@ export class ApiService {
         'https://bier-freunde.ch/rest/rapt/share.php/' + share,
       )
       .pipe(
+        map((session) => {
+          session.telemetry.forEach((t) => (t.date = new Date(t.date)));
+          return session;
+        }),
         catchError((err) => {
           this.snackBar.openFromComponent(AlertComponent, {
             data: {
