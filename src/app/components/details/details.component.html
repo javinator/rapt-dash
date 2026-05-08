@@ -7,14 +7,18 @@
   {{ session().start | date: 'dd/MM/yyyy' }} - {{ session().end | date: 'dd/MM/yyyy' }}
 }
 @if (telemetry().length > 0) {
-  @if (isActive()) {
+  @if (isActive() || true) {
   <h3 class="inline">
     @if (lastTelemetry().gravity) {
-      <span>Gravity: {{ lastTelemetry().gravity!.toFixed(3) }}</span>
+      <span>Gravity: {{ lastTelemetry().gravity!.toFixed(4) }}</span>
       &nbsp; - &nbsp;
     }
     @if (lastTelemetry().temperature) {
       <span>Temperature: {{ lastTelemetry().temperature!.toFixed(1) }} °C</span>
+    }
+    @if (gravityTrend() !== undefined) {
+      &nbsp; - &nbsp;
+      <span>Trend: <mat-icon fontIcon="{{ trendIcon() }}" class="trend-icon {{ trendIcon() }}" title="{{ gravityTrend() }} ppd"></mat-icon></span>
     }
   </h3>
   }
@@ -25,7 +29,7 @@
   </h4>
   <h4 class="inline">
     @if (lastTelemetry().battery) {
-      <span>Battery: {{ lastTelemetry().battery!.toFixed(1) }}%</span> &nbsp; - &nbsp;
+      <span>Battery: {{ lastTelemetry().battery!.toFixed() }}%</span> &nbsp; - &nbsp;
     }
     @if (lastTelemetry().rssi) {
       <span>Signal: {{ lastTelemetry().rssi }} dB</span> &nbsp; - &nbsp;

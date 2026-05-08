@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, firstValueFrom, Observable, of } from 'rxjs';
+import { catchError, firstValueFrom, map, Observable, of } from 'rxjs';
 import { Message, ProfileSession, Telemetry } from '@models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertComponent } from '@components';
@@ -116,6 +116,10 @@ export class ApiService {
         },
       )
       .pipe(
+        map((telemetry) => {
+          telemetry.forEach((t) => (t.date = new Date(t.date)));
+          return telemetry;
+        }),
         catchError((err) => {
           this.snackBar.openFromComponent(AlertComponent, {
             data: {

@@ -5,3 +5,22 @@
 div.no-data {
   margin: 32px 0;
 }
+
+.trend-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 24px;
+  cursor: help;
+}
+
+.trend-icon.keyboard_double_arrow_right {
+  color: #444;
+}
+
+.trend-icon.keyboard_double_arrow_up {
+  color: #741;
+}
+
+.trend-icon.keyboard_double_arrow_down {
+  color: #070;
+}
