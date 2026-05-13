@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import {
   AlertComponent,
   DetailsComponent,
@@ -18,10 +18,11 @@ import { Router } from '@angular/router';
   imports: [SpinnerComponent, MatIconModule, DetailsComponent],
   standalone: true,
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit, OnDestroy {
   private readonly apiService = inject(ApiService);
   private readonly snackBar = inject(MatSnackBar);
   private readonly router = inject(Router);
+  private intervalId!: number;
 
   loading = signal(true);
   session = signal<ProfileSession | undefined>(undefined);
@@ -29,6 +30,14 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.initializeData();
+    this.intervalId = window.setInterval(() => {
+      console.debug('Reload data');
+      this.initializeData();
+    }, 600000); // update every ten minutes
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 
   initializeData() {
