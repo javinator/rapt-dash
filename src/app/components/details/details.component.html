@@ -7,7 +7,7 @@
   {{ session().start | date: 'dd/MM/yyyy' }} - {{ session().end | date: 'dd/MM/yyyy' }}
 }
 @if (telemetry().length > 0) {
-  @if (isActive() || true) {
+  @if (isActive()) {
   <h3 class="inline">
     @if (lastTelemetry().gravity) {
       <span>Gravity: {{ lastTelemetry().gravity!.toFixed(4) }}</span>

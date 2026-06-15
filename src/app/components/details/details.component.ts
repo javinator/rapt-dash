@@ -43,6 +43,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
 
     const last = telemetry[telemetry.length - 1];
+    const last_s = telemetry[telemetry.length - 2];
+    const gravity = (last.gravity! + last_s.gravity!) / 2;
     const cutoff = new Date(last.date.getTime() - 24 * 60 * 60 * 1000);
     const last24h = telemetry.filter(
       (t) => t.date >= cutoff && t.date < last.date,
@@ -54,7 +56,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     const compare = Math.max(...last24h.map((t) => t.gravity ?? 0), 0);
 
-    return Math.round((last.gravity! - 1) * 10000 - (compare - 1) * 10000) / 10;
+    return Math.round((gravity - 1) * 10000 - (compare - 1) * 10000) / 10;
   });
 
   readonly now = signal(Date.now());
