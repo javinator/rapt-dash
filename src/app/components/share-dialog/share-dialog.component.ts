@@ -1,4 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   MatDialogModule,
   MAT_DIALOG_DATA,
@@ -16,6 +21,7 @@ import { Message } from '@models';
   templateUrl: './share-dialog.component.html',
   styleUrl: './share-dialog.component.scss',
   imports: [MatDialogModule, ClipboardModule, MatIcon],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class ShareDialogComponent {

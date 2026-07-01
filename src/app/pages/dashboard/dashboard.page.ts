@@ -1,4 +1,11 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   AlertComponent,
   DetailsComponent,
@@ -16,6 +23,7 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.page.html',
   styleUrl: './dashboard.page.scss',
   imports: [SpinnerComponent, MatIconModule, DetailsComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class DashboardPage implements OnInit, OnDestroy {

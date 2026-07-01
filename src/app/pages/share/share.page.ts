@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { DetailsComponent, SpinnerComponent } from '@components';
 import { ApiService } from '@services';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +17,7 @@ import { SharedSession } from '../../models/shared-session.model';
   templateUrl: './share.page.html',
   styleUrl: './share.page.scss',
   imports: [SpinnerComponent, MatIconModule, DetailsComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class SharePage implements OnInit {

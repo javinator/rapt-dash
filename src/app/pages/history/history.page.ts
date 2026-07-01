@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   AlertComponent,
   DetailsComponent,
@@ -24,6 +30,7 @@ import { DateUtil } from '@utils';
     DetailsComponent,
     DecimalPipe,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class HistoryPage implements OnInit {
