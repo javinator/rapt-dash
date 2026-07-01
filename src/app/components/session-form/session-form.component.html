@@ -2,13 +2,13 @@
   <input
     type="hidden"
     name="id"
-    [ngModel]="$safeNavigationMigration(session()?.id)"
+    [ngModel]="session()?.id"
   />
   <label for="name">Session Name:</label>
   <div>
     <input
       id="name"
-      [ngModel]="$safeNavigationMigration(session()?.name)"
+      [ngModel]="session()?.name"
       name="name"
       required
       type="text"
@@ -18,18 +18,14 @@
   <div class="date-time">
     <input
       id="startDate"
-      [ngModel]="
-        $safeNavigationMigration(session()?.start?.toString()?.slice(0, 10))
-      "
+      [ngModel]="session()?.start?.toString()?.slice(0, 10)"
       name="startDate"
       required
       type="date"
     />
     <input
       id="startTime"
-      [ngModel]="
-        $safeNavigationMigration(session()?.start?.toString()?.slice(11, 16))
-      "
+      [ngModel]="session()?.start?.toString()?.slice(11, 16)"
       name="startTime"
       required
       type="time"
@@ -40,17 +36,13 @@
   <div class="date-time">
     <input
       id="endDate"
-      [ngModel]="
-        $safeNavigationMigration(session()?.end?.toString()?.slice(0, 10))
-      "
+      [ngModel]="session()?.end?.toString()?.slice(0, 10)"
       name="endDate"
       type="date"
     />
     <input
       id="endTime"
-      [ngModel]="
-        $safeNavigationMigration(session()?.end?.toString()?.slice(11, 16))
-      "
+      [ngModel]="session()?.end?.toString()?.slice(11, 16)"
       name="endTime"
       type="time"
       step="60"
