@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import {
   MatDialogModule,
   MAT_DIALOG_DATA,
@@ -10,6 +10,7 @@ import {
   templateUrl: './confirmation-dialog.component.html',
   styleUrl: './confirmation-dialog.component.scss',
   imports: [MatDialogModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class ConfirmationDialogComponent {

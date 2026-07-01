@@ -1,4 +1,10 @@
-import { Component, input, OnInit, output } from '@angular/core';
+import {
+  Component,
+  input,
+  OnInit,
+  output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ProfileSession } from '@models';
 
@@ -7,6 +13,7 @@ import { ProfileSession } from '@models';
   templateUrl: './session-form.component.html',
   styleUrl: './session-form.component.scss',
   imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class SessionFormComponent implements OnInit {

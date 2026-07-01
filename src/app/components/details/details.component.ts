@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   signal,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { ProfileSession, Telemetry } from '@models';
 import { AgChartsModule } from 'ag-charts-angular';
@@ -25,6 +26,7 @@ import { MatIcon } from '@angular/material/icon';
     DatePipe,
     MatIcon,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class DetailsComponent implements OnInit, OnDestroy {

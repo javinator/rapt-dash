@@ -1,4 +1,10 @@
-import { Component, computed, input, OnInit } from '@angular/core';
+import {
+  Component,
+  computed,
+  input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Telemetry } from '@models';
 import { AgChartsModule } from 'ag-charts-angular';
 import {
@@ -12,6 +18,7 @@ import {
   templateUrl: './fermentation-graph.component.html',
   styleUrl: './fermentation-graph.component.scss',
   imports: [AgChartsModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class FermentationGraphComponent implements OnInit {

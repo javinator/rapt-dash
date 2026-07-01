@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, output, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
@@ -6,6 +6,7 @@ import { FormsModule, NgForm } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class LoginComponent {

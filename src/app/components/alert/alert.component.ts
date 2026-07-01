@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Message } from '@models';
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
@@ -8,6 +8,7 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
   templateUrl: './alert.component.html',
   styleUrl: './alert.component.scss',
   imports: [MatIconModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class AlertComponent {

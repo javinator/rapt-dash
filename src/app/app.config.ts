@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import {
   MAT_SNACK_BAR_DATA,
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
@@ -11,7 +11,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withXhr()),
     provideNativeDateAdapter(),
     { provide: MAT_SNACK_BAR_DATA, useValue: {} },
     {

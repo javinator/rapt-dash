@@ -1,10 +1,14 @@
 <form #f="ngForm" (ngSubmit)="submitForm(f)" ngNativeValidate>
-  <input type="hidden" name="id" [ngModel]="session()?.id">
+  <input
+    type="hidden"
+    name="id"
+    [ngModel]="$safeNavigationMigration(session()?.id)"
+  />
   <label for="name">Session Name:</label>
   <div>
     <input
       id="name"
-      [ngModel]="session()?.name"
+      [ngModel]="$safeNavigationMigration(session()?.name)"
       name="name"
       required
       type="text"
@@ -14,14 +18,18 @@
   <div class="date-time">
     <input
       id="startDate"
-      [ngModel]="session()?.start?.toString()?.slice(0, 10)"
+      [ngModel]="
+        $safeNavigationMigration(session()?.start?.toString()?.slice(0, 10))
+      "
       name="startDate"
       required
       type="date"
     />
     <input
       id="startTime"
-      [ngModel]="session()?.start?.toString()?.slice(11, 16)"
+      [ngModel]="
+        $safeNavigationMigration(session()?.start?.toString()?.slice(11, 16))
+      "
       name="startTime"
       required
       type="time"
@@ -32,13 +40,17 @@
   <div class="date-time">
     <input
       id="endDate"
-      [ngModel]="session()?.end?.toString()?.slice(0, 10)"
+      [ngModel]="
+        $safeNavigationMigration(session()?.end?.toString()?.slice(0, 10))
+      "
       name="endDate"
       type="date"
     />
     <input
       id="endTime"
-      [ngModel]="session()?.end?.toString()?.slice(11, 16)"
+      [ngModel]="
+        $safeNavigationMigration(session()?.end?.toString()?.slice(11, 16))
+      "
       name="endTime"
       type="time"
       step="60"

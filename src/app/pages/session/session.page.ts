@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   AlertComponent,
   ConfirmationDialogComponent,
@@ -21,6 +27,7 @@ import { ShareDialogComponent } from '../../components/share-dialog/share-dialog
   templateUrl: './session.page.html',
   styleUrl: './session.page.scss',
   imports: [SpinnerComponent, MatIconModule, DatePipe, SessionFormComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class SessionPage implements OnInit {

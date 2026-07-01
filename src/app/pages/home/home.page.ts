@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { LoginComponent, SpinnerComponent } from '@components';
 import { ApiService } from '@services';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
   imports: [SpinnerComponent, MatIconModule, LoginComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class HomePage implements OnInit {
