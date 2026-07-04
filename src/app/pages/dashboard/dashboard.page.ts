@@ -41,7 +41,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     this.intervalId = window.setInterval(() => {
       console.debug('Reload data');
       this.initializeData();
-    }, 600000); // update every ten minutes
+    }, 120000); // update every two minutes
   }
 
   ngOnDestroy() {

@@ -18,14 +18,22 @@
     }
     @if (gravityTrend() !== undefined) {
       &nbsp; - &nbsp;
-      <span>Trend: <mat-icon fontIcon="{{ trendIcon() }}" class="trend-icon {{ trendIcon() }}" title="{{ gravityTrend() }} ppd"></mat-icon></span>
+      <span>
+        Trend:
+        @if (isLargeScreen()) {
+          <mat-icon fontIcon="{{ trendIcon() }}" class="trend-icon {{ trendIcon() }}" title="{{ gravityTrend() }} ppd"></mat-icon>
+        } @else {
+          {{ gravityTrend() }} ppd
+        }
+      </span>
     }
   </h3>
   }
   <h4 class="inline">
     <span>Original Gravity: {{ (og()).toFixed(3) }}</span> &nbsp; - &nbsp;
     <span>Final Gravity: {{ (fg()).toFixed(3) }}</span> &nbsp; - &nbsp;
-    <span>Attenuation: {{ (((og() - fg()) / (og() - 1)) * 100).toFixed(1) }}%</span>
+    <span>Attenuation: {{ (((og() - fg()) / (og() - 1)) * 100).toFixed(1) }}%</span> &nbsp; - &nbsp;
+    <span>ABV: {{ abv().toFixed(1) }}%</span>
   </h4>
   <h4 class="inline">
     @if (lastTelemetry().battery) {

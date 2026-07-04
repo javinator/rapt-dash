@@ -89,6 +89,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   fg = computed(() => {
     return Math.min(...this.telemetry().map((tele) => tele.gravity ?? 1));
   });
+  abv = computed(() => {
+    const abv =
+      ((76 * (this.og() - this.fg())) / (1.777 - this.og())) *
+      (this.fg() / 0.8);
+    return abv > 1 ? abv : 0;
+  });
 
   trendIcon = computed(() => {
     if (!this.gravityTrend()) {
