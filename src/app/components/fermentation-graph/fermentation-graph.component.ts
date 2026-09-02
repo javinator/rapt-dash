@@ -15,6 +15,7 @@ import {
   standalone: true,
 })
 export class FermentationGraphComponent implements OnInit {
+  showLabels = input(true);
   telemetry = input.required<Telemetry[]>();
   maxTemp = computed(() => {
     return Math.max(...this.telemetry().map((tele) => tele.temperature ?? 0));
@@ -48,6 +49,7 @@ export class FermentationGraphComponent implements OnInit {
           label: {
             format: '%d/%m/%y',
             autoRotate: true,
+            enabled: this.showLabels(),
           },
           interval: {
             step: {
@@ -69,6 +71,7 @@ export class FermentationGraphComponent implements OnInit {
           position: 'left',
           label: {
             format: '#{.3f}',
+            enabled: this.showLabels(),
           },
         },
         temperatureAxis: {
@@ -80,6 +83,7 @@ export class FermentationGraphComponent implements OnInit {
           },
           label: {
             format: '#{.1f} °C',
+            enabled: this.showLabels(),
           },
         },
         rssiAxis: {

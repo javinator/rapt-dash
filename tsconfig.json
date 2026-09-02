@@ -18,8 +18,7 @@
       "@services": ["./src/app/services"],
       "@utils": ["./src/app/utils"],
       "@components": ["./src/app/components"]
-    },
-    "outDir": "./out-tsc/app"
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

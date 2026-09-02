@@ -46,9 +46,7 @@
       <span>Last Telemetry: {{ lastTelemetry().date | relativeTime: now() }}</span>
     }
   </h4>
-  @if (isLargeScreen()) {
-    <rd-fermentation-table [telemetry]="telemetry()"></rd-fermentation-table>
-  }
+  <rd-fermentation-table [telemetry]="telemetry()" [showLabels]="isLargeScreen()"></rd-fermentation-table>
 } @else {
   <div class="no-data">
     No telemetry data for this session!
