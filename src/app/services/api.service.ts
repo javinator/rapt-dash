@@ -15,7 +15,17 @@ export class ApiService {
   private readonly snackBar = inject(MatSnackBar);
   private readonly cookieService = inject(CookieService);
 
-  isAuthSet() {
+  isAuthSet(refresh = false) {
+    if (this.cookieService.check('basic-auth') && refresh) {
+      this.cookieService.set(
+        'basic-auth',
+        this.cookieService.get('basic-auth'),
+        {
+          expires: 14,
+          secure: true,
+        },
+      );
+    }
     return this.cookieService.check('basic-auth');
   }
 
@@ -40,7 +50,7 @@ export class ApiService {
           data: { type: 'success', text: 'Login successful!' } as Message,
         });
         this.cookieService.set('basic-auth', btoa(email + ':' + password), {
-          expires: 7,
+          expires: 14,
           secure: true,
         });
       }
